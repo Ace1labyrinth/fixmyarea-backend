@@ -35,7 +35,7 @@ const app = express();
 app.use(express.json({ limit:'10mb' }));
 app.use(express.urlencoded({ extended:true, limit:'10mb' }));
 
-const IssueRoutes = require("./routes/IssueRoutes");
+const IssueRoutes = require("../routes/IssueRoutes");
 
 console.log("✅ IssueRoutes loaded");
 
