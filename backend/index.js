@@ -12,23 +12,26 @@ const cors = require("cors");
 
 const allowedOrigins = [
   "http://localhost:3000", 
-  "https://timely-babka-c7d84e.netlify.app"
-]
+  "https://fixmyarea-frontend.onrender.com"
+
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+};
+
+app.use(cors(corsOptions));
 
 const app = express();
-app.use(cors({ origin: "*"
-  // origin: function (origin, callback) {
-  //   // Allow requests with no origin (like mobile apps or curl)
-  //   if (!origin) return callback(null, true);
-  //   if (allowedOrigins.includes(origin)) {
-  //     return callback(null, true);
-  //   } else {
-  //     return callback(new Error("Not allowed by CORS"));
-  //   }
-  // },
-  // methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  // credentials: true
-}));
+
 app.use(express.json({ limit:'10mb' }));
 app.use(express.urlencoded({ extended:true, limit:'10mb' }));
 
