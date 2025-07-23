@@ -1,11 +1,25 @@
 const mongoose = require("mongoose");
 
 const IssueSchema = new mongoose.Schema({
-    category: { type: String, default: "Pothole" },
-    description: { type: String, required: true},
-    location: { type: String },
-    lga: {type: String },
-    image: { type: String }, //URL
+    category: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  location: {
+    type: String,
+    required: true
+  },
+  lga: {
+    type: String,
+    required: true
+  },
+  image: {
+    type: String
+  },
     geo: {
         lat: Number,
         lng: Number,
