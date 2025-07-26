@@ -4,7 +4,7 @@ const Issue = require("../models/Issue");
 // const IssuesRoutes = require('./routes/IssuesRoutes');
 
 // Post new Issues
-router.post("/api/issues", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { category, description, location, lga, image, geo } = req.body;
 
