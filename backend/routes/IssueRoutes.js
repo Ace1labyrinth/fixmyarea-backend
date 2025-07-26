@@ -4,7 +4,7 @@ const Issue = require("../models/Issue");
 // const IssuesRoutes = require('./routes/IssuesRoutes');
 
 // Post new Issues
-router.post("/", async (req, res) => {
+router.post("/api/issues", async (req, res) => {
   try {
     const { category, description, location, lga, image, geo } = req.body;
 
@@ -25,6 +25,8 @@ router.post("/", async (req, res) => {
     });
 
     await newIssue.save();
+
+    console.log("✅ Issue saved successfully");
 
     res.status(201).json({ message: "Issue submitted successfully." });
   } catch (err) {
