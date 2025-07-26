@@ -6,12 +6,30 @@ const Issue = require("../models/Issue");
 // Post new Issues
 router.post("/", async (req, res) => {
   try {
-    const newIssue = new Issue(req.body);
+    const { category, description, location, lga, image, geo } = req.body;
+
+    console.log("🔥 Received issue body:", req.body);
+
+    // Basic validation
+    if (!category || !description || !location || !lga) {
+      return res.status(400).json({ message: "Missing required field." });
+    }
+
+    const newIssue = new Issue({
+      category,
+      description,
+      location,
+      lga,
+      image: image || null,
+      geo: geo || null,
+    });
+
     await newIssue.save();
-    res.status(201).json(newIssue);
+
+    res.status(201).json({ message: "Issue submitted successfully." });
   } catch (err) {
-    console.error(err);
-    res.status(400).json({ error: "Issue not Saved" });
+    console.error("❌ Backend error:", err.message);
+    res.status(500).json({ message: err.message });
   }
 });
 
